@@ -1,0 +1,17 @@
+Things to build:
+
+pages to build:
+	- new item page
+	- all items page
+		- search with mysql using sqlite
+	- shopping list page
+		- just a page to write and record needed items
+		- maybe lookup what we have against what we need
+
+scraper wrapper engine with relevant csontruct modules
+    - migrate to acension/ascension core
+
+dashboard with access to
+	- all items page
+	- shopping list page
+	- new items page

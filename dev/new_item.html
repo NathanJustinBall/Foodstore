@@ -1,0 +1,91 @@
+<html>
+
+<head>
+<title> login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="new_item_s.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#check_item').click(function(){
+            var barcode = document.getElementById("barcode").value;
+            var item = document.getElementById("item").value;
+            var vendor = document.getElementById("vendor").value;
+            console.log(barcode, item, vendor);
+            $.ajax({
+                type: "GET",
+                url: "query.php",
+                data: {"barcode": barcode, "vendor": vendor},
+                success: function(response){
+                    console.log(response);
+                    console.log("reach");
+                    if (response !== "null") {
+                        var data = $.parseJSON(response);
+                        $('#item').val(data.name);
+                        $('#weight').val(data.weight);
+                        console.log(data.weight);
+                        $('#price').val(data.price);
+                    }
+                    if (response === "novend") {
+                        alert("No vendor set!")
+                    }
+                    else {
+                        alert("No items matched your input")
+                    }
+                }
+                });
+        });
+    });
+
+</script>
+
+<div class="main_body">
+    <div class="central">
+        <form action="new_item.php" method="get">
+            <select id="vendor" name="vendor">
+                <option value="asda">Asda</option>
+                <option value="iceland">Iceland</option>
+                <option value="morrisons">Morissons</option>
+                <option value="waitrose">Waitrose</option>
+                <option value="tesco">Tesco</option>
+            </select>
+            <input type="button" name="check" value="Check item" id="check_item">
+            <input type="text" name="barcode" value="Barcode" id="barcode">
+            <br>
+            <br>
+            <p2>Item name:</p2>
+            <input type="text" name="item" value="Item" id="item">
+            
+
+            <br>
+            <p2>Bought on:</p2>
+            <input type="date" name="date" id="date">
+            <br>
+            <p2>Expires on:</p2>
+            <input type="date" name="date" id="date">
+            <br>
+            <p2>Price: &pound;</p2>
+            <input type="number" name="price" Value="Price" id="price" step="any">
+            <br>
+            <p2>Quantity:</p2>
+            <input type="number" name="count" Value="Quantity" id="count">
+            <br>
+            <p2>Weight (g):</p2>
+            <input type="text" name="weight" Value="" id="weight">
+            <br>
+            <p2>Open?</p2>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <br>
+            <input type="submit" value="Add Item">
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
