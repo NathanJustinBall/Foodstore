@@ -29,16 +29,17 @@ class Drain:
             #print("Pass")
 
     def get_image(self):
-        image_str = urlopen(self.picture_class+str(self.current_product_id)).read()
+        return urlopen(self.picture_class+str(self.current_product_id))
         # create a file object (stream)
-        image_file = io.BytesIO(image_str)
+        # image_file = io.BytesIO(image_str)
 
-    def build_json_return(self, data):
+    def build_json_return(self, data, img):
         product = {}
         product["id"] = data["skuId"]
+        product["image_adr"] = img
         product["name"] = data["skuName"]
         product["price"] = data["price"].replace("£", "")
-        product["weight"] = data["weight"].replace(" ", "")
+        product["weight"] = data["weight"].replace(" ", "").strip("G")
         print(json.dumps(product))
 
     def get_page(self):
@@ -47,11 +48,15 @@ class Drain:
 
         payload = json.loads(r.text)
         # print(r.text)
-
-        item = payload["payload"]["autoSuggestionItems"][0]
+        # print(payload)
+        try:
+            item = payload["payload"]["autoSuggestionItems"][0]
+        except IndexError:
+            print("invalid")
+            return 0
         self.current_product_id = item["skuId"]
-
-        self.build_json_return(item)
+        img_url = self.picture_class+str(barcode)
+        self.build_json_return(item, img_url)
         self.get_product_page()
 
 if __name__ == "__main__":
@@ -62,6 +67,6 @@ if __name__ == "__main__":
         # is a number
         main.get_page()
     else:
-        print("Invalid")
+        print("invalid")
 
     

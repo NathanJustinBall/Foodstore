@@ -3,8 +3,6 @@
 $vendor = '';
 $barcode = '';  # barcode can also funciton as item name
 
-var_dump($_GET);
-
 if (isset($_GET['vendor'])) {
     $vendor = $_GET['vendor'];
 }

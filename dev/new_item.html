@@ -21,17 +21,23 @@
                 data: {"barcode": barcode, "vendor": vendor},
                 success: function(response){
                     console.log(response);
-                    console.log("reach");
                     if (response !== "null") {
-                        var data = $.parseJSON(response);
-                        $('#item').val(data.name);
-                        $('#weight').val(data.weight);
-                        console.log(data.weight);
-                        $('#price').val(data.price);
+                        if (response === "invalid") {
+                            alert(barcode+"doesnt match anything!")
+                        }
+                        else if (response === "novend") {
+                            alert("No vendor set!")
+                        }
+                        else{  // if everything else has passed
+                            var data = $.parseJSON(response);
+                            $('#item').val(data.name);
+                            $('#weight').val(data.weight);
+                            console.log(data.weight);
+                            $('#price').val(data.price);
+                            $("#image").attr('src', data.image_adr);
+                        }
                     }
-                    if (response === "novend") {
-                        alert("No vendor set!")
-                    }
+                    
                     else {
                         alert("No items matched your input")
                     }
@@ -58,7 +64,9 @@
             <br>
             <p2>Item name:</p2>
             <input type="text" name="item" value="Item" id="item">
-            
+            <div id="img_container">
+                <img id="image">
+            </div>            
 
             <br>
             <p2>Bought on:</p2>
