@@ -99,6 +99,10 @@ input:checked + .slider:before {
 
 #img_container {
     float: right;
-    width: 100px;
+    background-color: #333;
+}
+
+#img_container.img {
+    width: 200px;
 }
 

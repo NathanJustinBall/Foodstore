@@ -55,7 +55,7 @@ class Drain:
             print("invalid")
             return 0
         self.current_product_id = item["skuId"]
-        img_url = self.picture_class+str(barcode)
+        img_url = self.picture_class+str(item["scene7AssetId"])  #scene7AssetId is the serach response image
         self.build_json_return(item, img_url)
         self.get_product_page()
 
