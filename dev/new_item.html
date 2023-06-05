@@ -22,8 +22,8 @@
                 success: function(response){
                     console.log(response);
                     if (response !== "null") {
-                        if (response === "invalid") {
-                            alert(barcode+"doesnt match anything!")
+                        if (response.trim() === "invalid") {
+                            alert(barcode+" doesn't match anything!")
                         }
                         else if (response === "no_vend") {
                             alert("No vendor set!")
@@ -31,7 +31,7 @@
                         else if (response === "no_scraper") {
                             alert("Scraper not currently implemented!")
                         }
-                        else{  // if everything else has passed
+                        else {  // if everything else has passed
                             var data = $.parseJSON(response);
                             $('#item').val(data.name);
                             $('#weight').val(data.weight);
@@ -61,7 +61,7 @@
                 <option value="waitrose">Waitrose</option>
                 <option value="tesco">Tesco</option>
             </select>
-            <input type="button" name="check" value="Check item" id="check_item">
+            <input type="button" name="check" value="Scrape item" id="check_item">
             <input type="text" name="barcode" value="Barcode" id="barcode">
             <br>
             <br>
