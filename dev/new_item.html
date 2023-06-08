@@ -22,7 +22,7 @@
                 success: function(response){
                     console.log(response);
                     if (response !== "null") {
-                        if (response.trim() === "invalid") {
+                        if (response.trim() === "invalid") {  // invalid comes from scraper
                             alert(barcode+" doesn't match anything!")
                         }
                         else if (response === "no_vend") {
@@ -37,6 +37,7 @@
                             $('#weight').val(data.weight);
                             console.log(data.weight);
                             $('#price').val(data.price);
+                            $('#item_id').val(data.id);
                             $("#image").attr('src', data.image_adr);
                         }
                     }
@@ -72,11 +73,17 @@
             </div>            
 
             <br>
+            <p2>Item ID:</p2>
+            <input type="text" name="item_id" Value="" id="item_id">
+            <br>
             <p2>Bought on:</p2>
             <input type="date" name="date" id="date">
             <br>
             <p2>Expires on:</p2>
             <input type="date" name="date" id="date">
+            <br>
+            <p2>Shelf life (once opend):</p2>
+            <input type="text" name="shelf_life" Value="" id="shelf_life">
             <br>
             <p2>Price: &pound;</p2>
             <input type="number" name="price" Value="Price" id="price" step="any">
@@ -88,10 +95,10 @@
             <input type="text" name="weight" Value="" id="weight">
             <br>
             <p2>Open?</p2>
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label>
+            <!--<label class="switch"> -->
+            <input type="checkbox" name="opend" id="opend" value="yes">
+            <!--    <span class="slider round"></span>
+            </label>  -->
             <br>
             <input type="submit" value="Add Item">
 

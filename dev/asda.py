@@ -8,11 +8,12 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--barcode', type=str, required=True)
+parser.add_argument('--show', type=bool, required=False)
 args = parser.parse_args()
 
 class Drain:
     def __init__(self):
-        self.predict_url = "https://groceries.asda.com/cmscontent/v2/items/autoSuggest?requestorigin=gi&searchTerm=ITEM&cacheable=true&storeId=4152&shipOnDate=2022-08-17&viewPort=xl"
+        self.predict_url = "https://groceries.asda.com/cmscontent/v2/items/autoSuggest?searchTerm=ITEM"
         self.product_url = "https://groceries.asda.com/product/"
         self.current_itme = 0
         self.current_product_id = 0
@@ -24,7 +25,6 @@ class Drain:
     def get_product_page(self,):
         header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
         r = requests.get(self.product_url+str(self.current_product_id), headers = header)
-        # print(r.content)
         #if self.picture_class in r.text:
             #print("Pass")
 
@@ -54,6 +54,9 @@ class Drain:
         except IndexError:
             print("invalid")
             return 0
+        if sp:
+            print(self.current_itme)
+            print(item)
         self.current_product_id = item["skuId"]
         img_url = self.picture_class+str(item["scene7AssetId"])  #scene7AssetId is the serach response image
         self.build_json_return(item, img_url)
@@ -62,6 +65,7 @@ class Drain:
 if __name__ == "__main__":
     main = Drain()
     barcode = args.barcode
+    sp = args.show
     if barcode.isnumeric:
         main.build_predict_url(barcode)  # item barcode 21156946 27244920
         # is a number
