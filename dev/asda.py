@@ -40,7 +40,9 @@ class Drain:
         product["name"] = data["skuName"]
         product["price"] = data["price"].replace("£", "")
         product["weight"] = data["weight"].replace(" ", "").strip("G")
-        print(json.dumps(product))
+        product["url"] = self.current_itme
+        product["vendor"] = "asda"
+        print(json.dumps(product))  # final call
 
     def get_page(self):
         header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
@@ -66,11 +68,8 @@ if __name__ == "__main__":
     main = Drain()
     barcode = args.barcode
     sp = args.show
-    if barcode.isnumeric:
-        main.build_predict_url(barcode)  # item barcode 21156946 27244920
-        # is a number
-        main.get_page()
-    else:
-        print("invalid")
-
+   
+    main.build_predict_url(barcode) 
+    main.get_page()
+ 
     
