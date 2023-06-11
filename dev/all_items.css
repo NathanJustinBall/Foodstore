@@ -1,0 +1,11 @@
+.central {
+    width: 80%;
+    padding: 10px;
+    background-color: #555;
+}
+
+.main_body {
+    margin-left: auto;
+    padding: 10px;
+    width: 80%;
+}

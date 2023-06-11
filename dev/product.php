@@ -72,7 +72,7 @@ class Product{
     public function get_id(): int{
         return $this->product_id;
     }
-    public function get_weight(): int{
+    public function get_weight(): string{
         return $this->weight;
     }
     public function get_price(): float{
@@ -94,7 +94,7 @@ class Product{
     public function set_product_id(?int $id){
         $this->product_id = $id;
     }
-    public function set_weight(?int $weight){
+    public function set_weight(?string $weight){
         $this->weight = $weight;
     }
     public function set_price(?float $price){

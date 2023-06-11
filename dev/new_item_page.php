@@ -6,7 +6,12 @@
 <link rel="stylesheet" href="new_item_s.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
+
 <body>
+
+<?php
+include 'links.php';
+?>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -19,10 +24,11 @@
                 type: "GET",
                 url: "query.php",
                 data: {"barcode": barcode, "vendor": vendor},
+                dataType: "json",
                 success: function(response){
                     console.log(response);
                     if (response !== "null") {
-                        if (response.trim() === "invalid") {  // invalid comes from scraper
+                        if (response === "invalid") {  // invalid comes from scraper
                             alert(barcode+" doesn't match anything!")
                         }
                         else if (response === "no_vend") {
@@ -32,7 +38,7 @@
                             alert("Scraper not currently implemented!")
                         }
                         else {  // if everything else has passed
-                            var data = $.parseJSON(response);
+                            var data = response;  // removed now unnecessary usage of parseJson as json is now returned automatically 
                             $('#item').val(data.name);
                             $('#weight').val(data.weight);
                             console.log(data.weight);
@@ -77,10 +83,10 @@
             <input type="text" name="item_id" Value="" id="item_id">
             <br>
             <p2>Bought on:</p2>
-            <input type="date" name="date" id="date">
+            <input type="date" name="date" id="date_bought">
             <br>
             <p2>Expires on:</p2>
-            <input type="date" name="date" id="date">
+            <input type="date" name="date" id="date_expiry">
             <br>
             <p2>Shelf life (days once opend):</p2>
             <input type="text" name="shelf_life" Value="1" id="shelf_life">

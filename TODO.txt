@@ -1,12 +1,14 @@
-Things to build:
+
 
 pages to build:
+	- login
+		explore usage of $_SESSION and $_COOKIE
 	- new item page
 	- all items page
-		- search with mysql using sqlite
+		- search with mysqli
 	- shopping list page
 		- just a page to write and record needed items
-		- maybe lookup what we have against what we need
+		- maybe dB ref lookup what we already have against what we need
 
 scraper wrapper engine with relevant csontruct modules
     - migrate to acension/ascension core
@@ -15,3 +17,12 @@ dashboard with access to
 	- all items page
 	- shopping list page
 	- new items page
+
+classes
+	Product. 
+		Populate the class from the database.
+	ProductRepository
+		Repositoy pattarns for procuct ammend
+	vendor
+		Specifically relating to how the scraper works, what it requires to function
+

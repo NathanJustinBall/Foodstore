@@ -10,7 +10,7 @@
 
 
 <?php
-header("Location: new_item.html");  // redirect to main login  some auth to go here
+header("Location: new_item_page.php");  // redirect to main login  some auth to go here
 exit();
 ?>
 

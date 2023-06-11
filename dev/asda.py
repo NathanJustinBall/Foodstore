@@ -25,13 +25,10 @@ class Drain:
     def get_product_page(self,):
         header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
         r = requests.get(self.product_url+str(self.current_product_id), headers = header)
-        #if self.picture_class in r.text:
-            #print("Pass")
+
 
     def get_image(self):
         return urlopen(self.picture_class+str(self.current_product_id))
-        # create a file object (stream)
-        # image_file = io.BytesIO(image_str)
 
     def build_json_return(self, data, img):
         product = {}
@@ -49,8 +46,7 @@ class Drain:
         r = requests.get(self.current_itme, headers = header)
 
         payload = json.loads(r.text)
-        # print(r.text)
-        # print(payload)
+
         try:
             item = payload["payload"]["autoSuggestionItems"][0]
         except IndexError:

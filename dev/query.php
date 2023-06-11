@@ -25,14 +25,11 @@ if ($vendor === "asda"){
     $shell = escapeshellcmd("python3 /foodstore/dev/asda.py --barcode ".'"'.$barcode.'"');
     //echo $shell;
     $output = exec($shell, $arr);
-    //$output_parse = json_decode($arr, true);
-    var_dump($arr);
-
+    $output_parse = json_decode($output, true);
     # create object
-    $product = new Product($arr);
-    
-    echo($product->get_img_url());
-    die($arr);
+    $product = new Product($output_parse);
+    //var_dump($arr);
+    die($arr[0]);
 }
 else {
     die("no_scraper");
