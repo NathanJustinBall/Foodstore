@@ -1,15 +1,14 @@
 <?php
+include 'config.php';
 class DB {
-    public $hostname = "db";
-    public $user = "user";
-    public $pass = "password";
-    public $selected_db = "db";
     public $connection = null;
 
-    public function __construct() {
-        $hostname = "db";   
-        $user = "user";
-        $pass = "password";
+    public function __construct() { 
+        $config = new Config("./not_dev/config.json");
+
+        $hostname = $config->getParameter('hostname');   
+        $user = $config->getParameter('user');
+        $pass = $config->getParameter('password');
         $selected_db = "db";
         $this->connection = new mysqli($hostname, $user, $pass, $selected_db);
         if ($this->connection->connect_error){
