@@ -9,7 +9,19 @@
 <div class="main_body">
     <!-- twigs go here-->
     <?php 
-    
+    include "dBHandler.php";
+    include "links.php";
+    include "product.php";
+
+    // initialise twig environment here
+    // initialize db and connect
+    $databaseObj = new DB();
+    $items = $databaseObj.getAll();  // in theory with big dB's should request how many rows then iterate over rows
+    foreach($items as $item) {
+        // create a new Product class and passes to twig
+        $current_product = new Product($item);
+
+    }
     ?>
 </div>
 </body>

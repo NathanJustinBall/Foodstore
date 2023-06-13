@@ -2,105 +2,126 @@
 
 // main object handler for products
 
-class Product{
+class Product
+{
     protected $name = "";
     protected $vendor = "";
     protected $price = 0;
     protected $weight = 0;
     protected $url = "";
     protected $img_url = "";
-    protected $product_id ="";
+    protected $product_id = "";
 
-    function __construct(array $product_json){
-        if (!empty($product_json)){
-            if (!empty($product_json["name"])){
+    function __construct(array $product_json)
+    {
+        if (!empty($product_json)) {
+            if (!empty($product_json["name"])) {
                 $this->set_name($product_json["name"]);
-            }
-            else {
+            } else {
                 $this->set_name(null);
             }
-            if (!empty($product_json["vendor"])){
+            if (!empty($product_json["vendor"])) {
                 $this->set_vendor($product_json["vendor"]);
-            }
-            else{
+            } else {
                 $this->set_vendor(null);
             }
-            if (!empty($product_json["price"])){
+            if (!empty($product_json["price"])) {
                 $this->set_price($product_json["price"]);
-            }
-            else{
+            } else {
                 $this->set_price(null);
             }
-            if (!empty($product_json["url"])){
+            if (!empty($product_json["url"])) {
                 $this->set_url($product_json["url"]);
-            }
-            else{
+            } else {
                 $this->set_url(null);
             }
-            if (!empty($product_json["image_adr"])){
+            if (!empty($product_json["image_adr"])) {
                 $this->set_img_url($product_json["image_adr"]);
-            }
-            else{
+            } else {
                 $this->set_img_url(null);
             }
-            if (!empty($product_json["weight"])){
+            if (!empty($product_json["weight"])) {
                 $this->set_weight($product_json["weight"]);
-            }
-            else{
+            } else {
                 $this->set_weight(null);
             }
-            if (!empty($product_json["id"])){
+            if (!empty($product_json["id"])) {
                 $this->set_product_id($product_json["id"]);
-            }
-            else{
+            } else {
                 $this->set_product_id(null);
             }
-            
+
         }
     }
 
     // getters & setters
-    public function get_name(): string{
+    public function get_name(): string
+    {
         return $this->name;
     }
-    public function get_url(): string{
+
+    public function get_url(): string
+    {
         return $this->url;
     }
-    public function get_img_url(): string{
+
+    public function get_img_url(): string
+    {
         return $this->img_url;
     }
-    public function get_id(): int{
+
+    public function get_id(): int
+    {
         return $this->product_id;
     }
-    public function get_weight(): string{
+
+    public function get_weight(): string
+    {
         return $this->weight;
     }
-    public function get_price(): float{
+
+    public function get_price(): float
+    {
         return $this->price;
     }
-    public function get_vendor(): string{
+
+    public function get_vendor(): string
+    {
         return $this->vendor;
     }
 
-    public function set_name(?string $name){
+    public function set_name(?string $name)
+    {
         $this->name = $name;
     }
-    public function set_url(?string $url){
+
+    public function set_url(?string $url)
+    {
         $this->url = $url;
     }
-    public function set_img_url(?string $img_url){
+
+    public function set_img_url(?string $img_url)
+    {
         $this->img_url = $img_url;
     }
-    public function set_product_id(?int $id){
+
+    public function set_product_id(?int $id)
+    {
         $this->product_id = $id;
     }
-    public function set_weight(?string $weight){
+
+    public function set_weight(?string $weight)
+    {
         $this->weight = $weight;
     }
-    public function set_price(?float $price){
+
+    public function set_price(?float $price)
+    {
         $this->price = $price;
     }
-    public function set_vendor(?string $vendor){
+
+    public function set_vendor(?string $vendor)
+    {
         $this->vendor = $vendor;
     }
 
