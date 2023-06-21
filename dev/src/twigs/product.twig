@@ -1,0 +1,14 @@
+<!-- using prodcut.php -->
+
+{% for Product in allProducts %}
+<div class="product">
+    <h1>Item name: {{ Product.get_name }} </h1>
+    <p2> Vendor {{ Product.get_vendor }} </p2>
+    <p2>Price {{ Product.get_price }} </p2>
+    <p2>Weight {{ Product.get_weight }} </p2>
+    <img id="image" src={{ Product.img_adr }}>
+    <p2> Date added {{ Product.date_bought }}</p2>
+    <p2> Date of expiry {{ Product.date_expiry }}</p2>
+    <p2> Remaining days {{ Product.shelf_life }}</p2>
+</div>
+{% endfor %}

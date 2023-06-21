@@ -1,0 +1,7 @@
+{
+    "db": {
+        "hostname": "db",
+        "password": "password",
+        "user": "user"
+}
+}

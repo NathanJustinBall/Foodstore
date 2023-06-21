@@ -1,3 +1,6 @@
 ./idea
 ./phpdocker
 ./not_dev
+./bin
+./tests
+./vendor

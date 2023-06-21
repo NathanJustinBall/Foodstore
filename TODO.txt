@@ -1,17 +1,42 @@
 
+  Generic PHP:
+   - Exceptions/Throwables/Catch
+   - Switch
+   - ternery (shorthand if statements) e.g ($something ? 'is true' : 'is not true');
+   - null coleaasce = $something ?: '';
+   - more work around $this inside a class.
+  
+  
+  Technologies:
+    twig
+    composer
+	
+Framework:
+	Laravel
+	CMS:
+		acension/ascension core
 
+Folder structre
+	src/
+		Controller/ # Classes for managing request and response by displaying
+					# templates with logic from services and or data from DB
+		Model/      # Classes for holding values from the database
+		Utils/      # Application services - business logic
+		...
+	namespacing      
+      
 pages to build:
 	- login
 		explore usage of $_SESSION and $_COOKIE
 	- new item page
 	- all items page
-		- search with mysqli
+		- search with mysqli uisng product class, and build with twigs
+  - single product page - e.g. /product/1 - where 1 is the id from the row  
 	- shopping list page
 		- just a page to write and record needed items
 		- maybe dB ref lookup what we already have against what we need
 
 scraper wrapper engine with relevant csontruct modules
-    - migrate to acension/ascension core
 
 dashboard with access to
 	- all items page
@@ -25,4 +50,3 @@ classes
 		Repositoy pattarns for procuct ammend
 	vendor
 		Specifically relating to how the scraper works, what it requires to function
-
