@@ -1,7 +1,7 @@
 <?php
-namespace App\controller;
+namespace App\Utils;
 
-class TwigControl {
+class Twig {
     protected $twig = null;
     public function __construct() {
         // define loading vars for twiggy

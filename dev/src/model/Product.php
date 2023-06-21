@@ -1,5 +1,5 @@
 <?php
-
+namespace App\model;
 // main object handler for products
 
 class Product

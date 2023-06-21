@@ -2,7 +2,7 @@
 namespace App\controller;
 use App\model\Product;
 use App\controller\dBHandler;
-use App\controller\TwigControl;
+use App\Utils\Twig;
 
 class PageController {
     public static function allItemsPage() {
@@ -29,7 +29,7 @@ class PageController {
             $allProducts[] = $current_product;
         
         }
-        $twigController = new TwigControl();
+        $twigController = new Twig();
         $twigController->render('product.twig', ["product" => $allProducts]);
     }
 }

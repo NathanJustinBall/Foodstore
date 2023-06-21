@@ -1,6 +1,6 @@
 ./idea
 ./phpdocker
-./not_dev
-./bin
-./tests
-./vendor
+./dev/bin
+./dev/tests
+./dev/vendor
+./dev/cache
