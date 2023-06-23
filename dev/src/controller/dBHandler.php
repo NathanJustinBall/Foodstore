@@ -25,7 +25,8 @@ class dBHandler
     }
 
     public function getColumns() {
-        return $this->connection->query("DESCRIBE own_items");
+        return $this->connection->query("SELECT column_name from INFORMATION_SCHEMA.COLUMNS where
+        table_schema = 'db' and table_name = 'own_items'");
     }
     
     /**

@@ -1,18 +1,21 @@
 <?php
 namespace App\Utils;
 
+
 class Twig {
     protected $twig = null;
     public function __construct() {
-        // define loading vars for twiggy
+        // define loading vars for twiggy   
         $loader = new \Twig\Loader\FilesystemLoader('../src/twigs');
-        $this->twig = new \Twig\Environment($loader, [
-            'cache' => './dev/cache',
-            ]);
+        $this->twig = new \Twig\Environment($loader,); 
+
+
     }
-    public function render($twigName, $twigArgs) {
-        echo $this->twig->render($twigName, $twigArgs);
-    }
-        
-    
+
+    public function twig_render($twigName, $twigArgs) {
+        echo "rendering";
+        // load template
+        $tmp = $this->twig->load("product.twig");
+        echo $tmp->render(["allProducts" => $twigArgs]);
+    }    
 }

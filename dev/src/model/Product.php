@@ -11,61 +11,88 @@ class Product
     protected $url = "";
     protected $img_url = "";
     protected $product_id = "";
+    protected $expiration_period = 0;  // days until product expires
+    protected $item_date_opend = "";
+    protected $item_date_expiry = "";
+    protected $item_date_add = "";
 
     function __construct(array $product_json)
     {
+        //var_dump($product_json["item_name"]);
         if (!empty($product_json)) {
-            if (!empty($product_json["name"])) {
-                $this->set_name($product_json["name"]);
+            if (!empty($product_json["item_name"])) {
+                $this->set_name($product_json["item_name"]);
             } else {
                 $this->set_name(null);
             }
-            if (!empty($product_json["vendor"])) {
-                $this->set_vendor($product_json["vendor"]);
+            if (!empty($product_json["item_vendor"])) {
+                $this->set_vendor($product_json["item_vendor"]);
             } else {
                 $this->set_vendor(null);
             }
-            if (!empty($product_json["price"])) {
-                $this->set_price($product_json["price"]);
+            if (!empty($product_json["item_price"])) {
+                $this->set_price($product_json["item_price"]);
             } else {
                 $this->set_price(null);
             }
-            if (!empty($product_json["url"])) {
-                $this->set_url($product_json["url"]);
+            if (!empty($product_json["item_url"])) {
+                $this->set_url($product_json["item_url"]);
             } else {
                 $this->set_url(null);
             }
-            if (!empty($product_json["image_adr"])) {
-                $this->set_img_url($product_json["image_adr"]);
+            if (!empty($product_json["item_img_url"])) {
+                $this->set_img_url($product_json["item_img_url"]);
             } else {
                 $this->set_img_url(null);
             }
-            if (!empty($product_json["weight"])) {
-                $this->set_weight($product_json["weight"]);
+            if (!empty($product_json["item_weight"])) {
+                $this->set_weight($product_json["item_weight"]);
             } else {
                 $this->set_weight(null);
             }
-            if (!empty($product_json["id"])) {
-                $this->set_product_id($product_json["id"]);
+            if (!empty($product_json["item_skuid"])) {
+                $this->set_product_id($product_json["item_skuid"]);
             } else {
                 $this->set_product_id(null);
             }
+            if (!empty($product_json["item_expiration_peroid"])) {
+                $this->set_expiration_peroid($product_json["item_expiration_peroid"]);
+            } else {
+                $this->set_expiration_peroid(null);
+            }
+            if (!empty($product_json["item_date_opend"])) {
+                $this->set_item_date_opend($product_json["item_date_opend"]);
+            } else {
+                $this->set_item_date_opend(null);
+            }
+
+            if (!empty($product_json["item_date_expiry"])) {
+                $this->set_item_date_expiry($product_json["item_date_expiry"]);
+            } else {
+                $this->set_item_date_expiry(null);
+            }
+            if (!empty($product_json["item_date_add"])){
+                $this->set_item_date_add($product_json["item_date_add"]);
+            } else {
+                $this->set_item_date_add(null);
+            }
+
 
         }
     }
 
     // getters & setters
-    public function get_name(): string
+    public function get_name(): ?string
     {
         return $this->name;
     }
 
-    public function get_url(): string
+    public function get_url(): ?string
     {
         return $this->url;
     }
 
-    public function get_img_url(): string
+    public function get_img_url(): ?string
     {
         return $this->img_url;
     }
@@ -75,7 +102,7 @@ class Product
         return $this->product_id;
     }
 
-    public function get_weight(): string
+    public function get_weight(): ?string
     {
         return $this->weight;
     }
@@ -88,6 +115,22 @@ class Product
     public function get_vendor(): string
     {
         return $this->vendor;
+    }
+    public function get_expiration_period(): int
+    {
+        return $this->expiration_period;
+    }
+    public function get_item_date_expiry(): string 
+    {
+        return $this->item_date_expiry;
+    }
+    public function get_item_date_opend(): string
+    {
+        return $this->item_date_opend;
+    }
+    public function get_item_date_add(): string
+    {
+        return $this->item_date_add;
     }
 
     public function set_name(?string $name)
@@ -124,7 +167,22 @@ class Product
     {
         $this->vendor = $vendor;
     }
-
+    public function set_expiration_peroid(?int $expiration_period) 
+    {
+        $this->expiration_period = $expiration_period;
+    }
+    public function set_item_date_expiry(?string $item_date_expiry)
+    {
+        $this->item_date_expiry = $item_date_expiry;
+    }
+    public function set_item_date_opend(?string $item_date_opend) 
+    {
+        $this->item_date_opend = $item_date_opend;
+    }
+    public function set_item_date_add(?string $item_date_add)
+    {
+        $this->item_date_add = $item_date_add;
+    }
 
 }
 
