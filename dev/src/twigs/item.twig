@@ -1,0 +1,62 @@
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href='/new_item_s.css' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:wght@200&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% endblock %}
+
+<div class="main_body">
+    <div class="central">
+        <form action="new_item.php" method="get">
+            <select id="vendor" name="vendor">
+                <option value="asda">Asda</option>
+                <option value="iceland">Iceland</option>
+                <option value="morrisons">Morissons</option>
+                <option value="waitrose">Waitrose</option>
+                <option value="tesco">Tesco</option>
+            </select>
+            <input type="submit" name="check_item" value="Scrape item" id="check_item" >
+            <input type="text" name="barcode" value="Barcode" id="barcode">
+            <br>
+            <br>
+            <p2>Item name:</p2>
+            <input type="text" name="item" value="Item" id="item">
+            <div id="img_container">
+                <img id="image">
+            </div>            
+
+            <br>
+            <p2>Item ID:</p2>
+            <input type="text" name="item_id" Value="" id="item_id">
+            <br>
+            <p2>Bought on:</p2>
+            <input type="date" name="date" id="date_bought">
+            <br>
+            <p2>Expires on:</p2>
+            <input type="date" name="date" id="date_expiry">
+            <br>
+            <p2>Shelf life (days once opend):</p2>
+            <input type="text" name="shelf_life" Value="1" id="shelf_life">
+            <br>
+            <p2>Price: &pound;</p2>
+            <input type="number" name="price" Value="0.00" id="price" step="any">
+            <br>
+            <p2>Quantity:</p2>
+            <input type="number" name="count" Value="1" id="count">
+            <br>
+            <p2>Weight (g):</p2>
+            <input type="text" name="weight" Value="1" id="weight">
+            <br>
+            <p2>Open?</p2>
+            <!--<label class="switch"> -->
+            <input type="checkbox" name="opend" id="opend" value="yes">
+            <!--    <span class="slider round"></span>
+            </label>  -->
+            <br>
+            <input type="submit" name="add_item" value="Add Item">
+
+        </form>
+    </div>
+</div>

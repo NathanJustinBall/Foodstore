@@ -1,0 +1,36 @@
+html *{
+    font-family: 'Ysabeau Infant', sans-serif;
+}
+
+body {
+    background-color: #555;
+}
+
+.product_space {
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+    background-color: #222;
+    overflow: auto;
+}
+
+
+
+.product {
+    color: aquamarine;
+    background-color: #333;
+    padding: 10px;
+    margin: 5px;
+    float: left;
+    width: 32%; 
+}
+
+.product p2{
+    font-size: medium;
+}
+.product img {
+    margin: 10px;
+    max-width: 200px;
+    float: right;
+    clear: both;
+}

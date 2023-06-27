@@ -1,15 +1,26 @@
 
-{% for Product in allProducts %}
-<div class="product">
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href='/all_items.css' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:wght@200&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% endblock %}
 
-    <h1>{{ Product.get_name }} </h1>
-    <p2>Vendor {{ Product.get_vendor }} </p2>
-    <p2>Price {{ Product.get_price }} </p2>
-    <p2>Weight {{ Product.get_weight }} </p2>
-    <img id="image" src={{ Product.get_img_url }}>
-    <p2> Date added {{ Product.get_item_date_add }}</p2>
-    <p2> Date of expiry {{ Product.date_expiry }}</p2>
-    <p2> Remaining days {{ Product.shelf_life }}</p2>
+<div class=product_space>
+    {% for Product in allProducts %}
+
+    <div class="product">
+        <h1>{{ Product.get_name }} </h1>
+        <img id="image" src={{ Product.get_img_url }} class="w3-round">
+        <p2>Vendor {{ Product.get_vendor }} </p2> <br>
+        <p2>Price {{ Product.get_price }} </p2> <br>
+        <p2>Weight {{ Product.get_weight }} </p2> <br>   
+        <p2> Date added {{ Product.get_item_date_add }}</p2> <br>
+        <p2> Date of expiry {{ Product.date_expiry }}</p2> <br>
+        <p2> Remaining days {{ Product.shelf_life }}</p2>
+    </div>
+
+    {% endfor %} 
 </div>
-
-{% endfor %} 

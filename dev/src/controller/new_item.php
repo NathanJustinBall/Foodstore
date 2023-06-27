@@ -1,30 +1,32 @@
 <?php
+namespace App\controller;
+use App\controller\dBHandler;
+use App\controller\Query;
 
-// init server and connection]
-$hostname = "db";
-$user = "user";
-$pass = "password";
-
-$conn = new mysqli($hostname, $user, $pass);  // migrate to using dBHandler
-
-if($conn->connect_error){
-    die("failed to connect");
-}
-
-else {
-    echo("connected");
-}
+// init db controller
+$DB = new dBHandler;
 
 # condition array, of append conditions in which failed
 $failed_conditions = array();
 
-// show available tables
-var_dump($conn->query("SHOW TABLES"));
 
 $conn->select_db("db");
 $data_for_sql = array();
 $form_data = $_GET;
 
+//`item_vendor` TINYTEXT NULL
+if (isset($form_data["vendor"]) && is_string($form_data["vendor"])) {
+    $data_for_sql["item_vendor"] = $form_data["vendor"];
+}
+else {
+    array_push($failed_conditions, "vendor");
+}
+
+// check status of GET, wether "check_item" for scraping or "add_item" for new item
+if ($form_data["check_item"]){ // pull barcode and vendor
+    $query = new Query($form_data["vendor"], $form_data["barcode"]);
+
+}
 
 // go over all aspects of form
 //`item_name` TEXT NULL,
@@ -36,13 +38,7 @@ else { // if not set or not a string
     array_push($failed_conditions, "item");
 }
 
-//`item_vendor` TINYTEXT NULL
-if (isset($form_data["vendor"]) && is_string($form_data["vendor"])) {
-    $data_for_sql["item_vendor"] = $form_data["vendor"];
-}
-else {
-    array_push($failed_conditions, "vendor");
-}
+
 
 //`item_skuid` INT(11) UNSIGNED NULL DEFAULT NULL,
 $data_for_sql["item_skuid"] = 0;
@@ -96,18 +92,14 @@ if (empty($failed_conditions)){
     $keys = implode(',', array_keys($data_for_sql));  // use keys as columns header
     $values = "'".implode("', '", array_values($data_for_sql))."'";
 
-    $sql = "INSERT INTO own_items ($keys) VALUES ($values)";
+    $DB->insert($keys, $values);
 
 }
 else {
     die(implode(",", $failed_conditions));
 }
 
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+
 
 header("Location: new_item.html");
 ?>

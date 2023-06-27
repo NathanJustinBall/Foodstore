@@ -7,15 +7,13 @@ class Twig {
     public function __construct() {
         // define loading vars for twiggy   
         $loader = new \Twig\Loader\FilesystemLoader('../src/twigs');
+        $loader->addPath("../public/", "public");
         $this->twig = new \Twig\Environment($loader,); 
-
 
     }
 
-    public function twig_render($twigName, $twigArgs) {
-        echo "rendering";
-        // load template
-        $tmp = $this->twig->load("product.twig");
-        echo $tmp->render(["allProducts" => $twigArgs]);
+    public function render($twigName, $twigArgs) {
+        $tmp = $this->twig->load($twigName);
+        echo $tmp->render($twigArgs);
     }    
 }

@@ -1,39 +1,27 @@
 <?php 
-require 'src/controller/product.php';
+namespace App\controller;
 
-$vendor = '';
-$barcode = '';  # barcode also funcitons as item name
+class Query {
+    public $vendor = '';
+    public $searchQuery = '';  # barcode also funcitons as item name
 
+    public function __construct($vendor, $searchQuery){
+        $this->searchQuery = $searchQuery;
+        if ($vendor === "asda"){
+            $this->asda();
+        }
+        else {  // pass all other scraper checks before we die..
+            die("no_scraper");
+        }
+    }
 
-if (isset($_GET['vendor'])) {
-    $vendor = $_GET['vendor'];
+    public function asda(){
+        $shell = escapeshellcmd("python3 /foodstore/dev/assets/scrapers/asda.py --barcode ".'"'.$this->searchQuery.'"');
+        //echo $shell;
+        $output = exec($shell, $arr);
+        $output_parse = json_decode($output, true);
+        //var_dump($arr);
+        die($arr[0]);
+    }
+
 }
-if (isset($_GET['barcode'])){
-    $barcode = $_GET['barcode'];
-}
-
-if ($vendor === '') {
-    die('no_vend');  # kill condition 
-}
-
-
-// $request->getPostParameter('vendor')
-
-//load appropirate scraper 
-
-if ($vendor === "asda"){
-    $shell = escapeshellcmd("python3 /foodstore/dev/assets/scrapers/asda.py --barcode ".'"'.$barcode.'"');
-    //echo $shell;
-    $output = exec($shell, $arr);
-    $output_parse = json_decode($output, true);
-    # create object
-    $product = new Product($output_parse);
-    //var_dump($arr);
-    die($arr[0]);
-}
-else {
-    die("no_scraper");
-}
-
-
-?>
