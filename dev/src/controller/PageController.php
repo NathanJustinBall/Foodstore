@@ -24,8 +24,10 @@ class PageController {
         $twigController->render('product.twig', array("allProducts"=>$allProducts));
     }
 
-    public static function newItemPage() {
+    public static function newItemPage($request) {
+ 
         $twigController = new Twig();
-        $twigController->render('item.twig', array("item"=>""));
+        //if ($item == null)
+        $twigController->render('item.twig', array("item"=>$request->item));
     }
 }

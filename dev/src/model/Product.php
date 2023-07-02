@@ -10,7 +10,7 @@ class Product
     protected $weight = 0;
     protected $url = "";
     protected $img_url = "";
-    protected $product_id = "";
+    protected $product_id = 0;
     protected $expiration_period = 0;  // days until product expires
     protected $item_date_opend = "";
     protected $item_date_expiry = "";

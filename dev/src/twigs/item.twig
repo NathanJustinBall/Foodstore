@@ -7,9 +7,39 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 {% endblock %}
 
+
+{% if (item is defined) and (item != "new") %} 
+    {% set barcode = "" %}
+    {% set name = item.item_name %}
+    {% set vendor = "vendor" %}
+    {% set item_id = item.item_skuid %}
+    {% set item_price = item.item_price %}
+    {% set item_opend = item.item_opend %}
+    {% set item_weight = item.item_weight %}
+    {% set item_qty = item.item_qty %}
+    {% set item_date_add = "now"|date("Y-m-d") %}
+    {% set item_expiry = item.item_date_expiry %}
+    {% set item_expiration_period = item.item_expiration_period %}
+    {% set img_url = item.item_img_url %}
+
+{% else %} <!-- preset vals for nonerxistant item -->
+    {% set barcode = "item name or barcode"%}
+    {% set name = "Item name" %}
+    {% set vendor = "vendor" %}
+    {% set item_id = "enter item id" %}
+    {% set item_price = 0 %}
+    {% set item_opend = 0 %}
+    {% set item_weight = "0g" %}
+    {% set item_qty = 0 %}
+    {% set item_date_add = "now"|date("Y/m/d") %}
+    {% set item_expiry = "now"|date("Y/m/d") %}
+    {% set item_expiration_period = 0 %}
+    {% set img_url = "" %}
+{% endif %}
+
 <div class="main_body">
     <div class="central">
-        <form action="new_item.php" method="get">
+        <form action="/addnewitem" method="post">
             <select id="vendor" name="vendor">
                 <option value="asda">Asda</option>
                 <option value="iceland">Iceland</option>
@@ -18,42 +48,39 @@
                 <option value="tesco">Tesco</option>
             </select>
             <input type="submit" name="check_item" value="Scrape item" id="check_item" >
-            <input type="text" name="barcode" value="Barcode" id="barcode">
+            <input type="text" name="barcode" value="{{barcode}}" id="barcode">
             <br>
             <br>
             <p2>Item name:</p2>
-            <input type="text" name="item" value="Item" id="item">
+            <input type="text" name="item" value="{{name}}" id="item">
             <div id="img_container">
-                <img id="image">
+                <img id="image" src="{{img_url}}">
             </div>            
 
             <br>
             <p2>Item ID:</p2>
-            <input type="text" name="item_id" Value="" id="item_id">
+            <input type="text" name="item_id" Value="{{item_id}}" id="item_id">
             <br>
             <p2>Bought on:</p2>
-            <input type="date" name="date" id="date_bought">
+            <input type="date" name="date" id="date_bought" value="{{item_date_add}}">
             <br>
             <p2>Expires on:</p2>
-            <input type="date" name="date" id="date_expiry">
+            <input type="date" name="date" id="date_expiry" value="{{item_date_expiry}}">
             <br>
             <p2>Shelf life (days once opend):</p2>
-            <input type="text" name="shelf_life" Value="1" id="shelf_life">
+            <input type="text" name="shelf_life" Value="{{item_expiration_period}}" id="shelf_life">
             <br>
             <p2>Price: &pound;</p2>
-            <input type="number" name="price" Value="0.00" id="price" step="any">
+            <input type="number" name="price" Value="{{item_price}}" id="price" step="any">
             <br>
             <p2>Quantity:</p2>
-            <input type="number" name="count" Value="1" id="count">
+            <input type="number" name="count" Value="{{item_qty}}" id="count">
             <br>
             <p2>Weight (g):</p2>
-            <input type="text" name="weight" Value="1" id="weight">
+            <input type="text" name="weight" Value="{{item_weight}}" id="weight">
             <br>
             <p2>Open?</p2>
-            <!--<label class="switch"> -->
-            <input type="checkbox" name="opend" id="opend" value="yes">
-            <!--    <span class="slider round"></span>
-            </label>  -->
+            <input type="checkbox" name="opend" id="opend" value="{{item_opend}}">
             <br>
             <input type="submit" name="add_item" value="Add Item">
 

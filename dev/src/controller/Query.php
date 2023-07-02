@@ -7,21 +7,24 @@ class Query {
 
     public function __construct($vendor, $searchQuery){
         $this->searchQuery = $searchQuery;
-        if ($vendor === "asda"){
-            $this->asda();
-        }
-        else {  // pass all other scraper checks before we die..
-            die("no_scraper");
-        }
+        $this->vendor = $vendor;
+       
     }
 
     public function asda(){
         $shell = escapeshellcmd("python3 /foodstore/dev/assets/scrapers/asda.py --barcode ".'"'.$this->searchQuery.'"');
-        //echo $shell;
         $output = exec($shell, $arr);
-        $output_parse = json_decode($output, true);
-        //var_dump($arr);
-        die($arr[0]);
+        // $output_parse = json_decode($output, true);
+
+        return($arr[0]);
+    }
+    public function get(){
+        if ($this->vendor === "asda"){
+            return($this->asda());
+        }
+        else {  // pass all other scraper checks before we die..
+            die("no_scraper");
+        }
     }
 
 }
