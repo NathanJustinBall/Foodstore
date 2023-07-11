@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 {% endblock %}
 
+{% include "navigation.twig" %}
 
-{% if (item is defined) and (item != "new") %} 
+
+{% if (item != "new") %} 
     {% set barcode = "" %}
     {% set name = item.item_name %}
     {% set vendor = "vendor" %}
@@ -18,9 +20,9 @@
     {% set item_weight = item.item_weight %}
     {% set item_qty = item.item_qty %}
     {% set item_date_add = "now"|date("Y-m-d") %}
-    {% set item_expiry = item.item_date_expiry %}
+    {% set item_date_expiry = item.item_date_expiry %}
     {% set item_expiration_period = item.item_expiration_period %}
-    {% set img_url = item.item_img_url %}
+    {% set img_url = item.image_adr %}
 
 {% else %} <!-- preset vals for nonerxistant item -->
     {% set barcode = "item name or barcode"%}
@@ -29,10 +31,10 @@
     {% set item_id = "enter item id" %}
     {% set item_price = 0 %}
     {% set item_opend = 0 %}
-    {% set item_weight = "0g" %}
+    {% set item_weight = "0" %}
     {% set item_qty = 0 %}
     {% set item_date_add = "now"|date("Y/m/d") %}
-    {% set item_expiry = "now"|date("Y/m/d") %}
+    {% set item_date_expiry = "now"|date("Y/m/d") %}
     {% set item_expiration_period = 0 %}
     {% set img_url = "" %}
 {% endif %}
@@ -55,6 +57,8 @@
             <input type="text" name="item" value="{{name}}" id="item">
             <div id="img_container">
                 <img id="image" src="{{img_url}}">
+                <br>
+                <input type="text" name="img_url" Value="{{img_url}}" id="img_url">
             </div>            
 
             <br>
@@ -62,10 +66,10 @@
             <input type="text" name="item_id" Value="{{item_id}}" id="item_id">
             <br>
             <p2>Bought on:</p2>
-            <input type="date" name="date" id="date_bought" value="{{item_date_add}}">
+            <input type="date" name="date_bought" id="date_bought" value="{{item_date_add}}">
             <br>
             <p2>Expires on:</p2>
-            <input type="date" name="date" id="date_expiry" value="{{item_date_expiry}}">
+            <input type="date" name="date_expiry" id="date_expiry" value="{{item_date_expiry}}">
             <br>
             <p2>Shelf life (days once opend):</p2>
             <input type="text" name="shelf_life" Value="{{item_expiration_period}}" id="shelf_life">

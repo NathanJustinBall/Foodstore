@@ -32,13 +32,13 @@ class Drain:
 
     def build_json_return(self, data, img):
         product = {}
-        product["id"] = data["skuId"]
+        product["item_skuid"] = data["skuId"]
         product["image_adr"] = img
-        product["name"] = data["skuName"]
-        product["price"] = data["price"].replace("£", "")
-        product["weight"] = data["weight"].replace(" ", "").strip("G")
-        product["url"] = self.current_itme
-        product["vendor"] = "asda"
+        product["item_name"] = data["skuName"]
+        product["item_price"] = data["price"].replace("£", "")
+        product["item_weight"] = data["weight"].replace(" ", "").strip("G")
+        product["item_url"] = self.current_itme
+        product["item_vendor"] = "asda"
         print(json.dumps(product))  # final call
 
     def get_page(self):
@@ -48,7 +48,7 @@ class Drain:
         payload = json.loads(r.text)
 
         try:
-            item = payload["payload"]["autoSuggestionItems"][0]
+            item = payload["payload"]["autoSuggestionItems"][0]  # possbily offer all?
         except IndexError:
             print("invalid")
             return 0

@@ -1,5 +1,5 @@
 <?php
-namespace App\controller;
+namespace App\model;
 use App\controller\config;
 
 class dBHandler
@@ -26,7 +26,32 @@ class dBHandler
         $this->connection->close();
     }
 
-    public function insert($key, $value) {
+
+    public function insert($item) {
+        $column_array = $this->getColumns();
+
+        $all_keys = array_keys($item);
+        foreach($all_keys as $header) {  // selecting the title of each
+            if (in_array($header, array_keys($column_array))){
+                // get current itme value type
+                //$curr_type = gettype($item[$header]);
+                //$column_type = $column_array[$header];
+                //if ($curr_type == $column_type){
+                    // checking values of array to match against expected db entry
+                    continue;
+                //}
+                //else {
+                //    return array("invalid_value", $item[$header], $curr_type, $column_array[$header], $column_type);
+               // }
+            }
+            else {
+                return "invalid_col";
+            } 
+        }
+
+        $key = implode(',', array_keys($item));  // use keys as columns header
+        $value = "'".implode("', '", array_values($item))."'";
+
         $sql = "INSERT INTO $this->tableName ($key) VALUES ($value)";
         if ($this->connection->query($sql) === TRUE) {
             return "New record created successfully";
@@ -35,9 +60,15 @@ class dBHandler
           }
     }
 
-    public function getColumns() {
-        return $this->connection->query("SELECT column_name from INFORMATION_SCHEMA.COLUMNS where
-        table_schema = 'db' and table_name = $this->tableName");
+    public function getColumns() {  // gets names of columns from database, asigns array of column: data_type
+        $columnArray = array();
+        $columns = $this->connection->query("SELECT * from " . $this->tableName);
+        
+        while ($columnInfo = $columns->fetch_field()){
+
+            $columnArray[$columnInfo->name] = $columnInfo->type; // returns number relative to tpye
+        }
+        return $columnArray;
     }
     
     /**

@@ -11,70 +11,84 @@ class Product
     protected $url = "";
     protected $img_url = "";
     protected $product_id = 0;
+    protected $qty = 0;
     protected $expiration_period = 0;  // days until product expires
     protected $item_date_opend = "";
     protected $item_date_expiry = "";
     protected $item_date_add = "";
+    protected $item_opend = 0;  //boolean int
+    protected $json = array();
 
-    function __construct(array $product_json)
+    function __construct(array $productArray)
     {
-        //var_dump($product_json["item_name"]);
-        if (!empty($product_json)) {
-            if (!empty($product_json["item_name"])) {
-                $this->set_name($product_json["item_name"]);
+        $this->json = $productArray;
+        //var_dump($productArray["item_name"]);
+        if (!empty($productArray)) {
+            if (!empty($productArray["item_name"])) {
+                $this->set_name($productArray["item_name"]);
             } else {
                 $this->set_name(null);
             }
-            if (!empty($product_json["item_vendor"])) {
-                $this->set_vendor($product_json["item_vendor"]);
+            if (!empty($productArray["item_vendor"])) {
+                $this->set_vendor($productArray["item_vendor"]);
             } else {
                 $this->set_vendor(null);
             }
-            if (!empty($product_json["item_price"])) {
-                $this->set_price($product_json["item_price"]);
+            if (!empty($productArray["item_price"])) {
+                $this->set_price($productArray["item_price"]);
             } else {
                 $this->set_price(null);
             }
-            if (!empty($product_json["item_url"])) {
-                $this->set_url($product_json["item_url"]);
+            if (!empty($productArray["item_url"])) {
+                $this->set_url($productArray["item_url"]);
             } else {
                 $this->set_url(null);
             }
-            if (!empty($product_json["item_img_url"])) {
-                $this->set_img_url($product_json["item_img_url"]);
+            if (!empty($productArray["item_img_url"])) {
+                $this->set_img_url($productArray["item_img_url"]);
             } else {
                 $this->set_img_url(null);
             }
-            if (!empty($product_json["item_weight"])) {
-                $this->set_weight($product_json["item_weight"]);
+            if (!empty($productArray["item_weight"])) {
+                $this->set_weight($productArray["item_weight"]);
             } else {
                 $this->set_weight(null);
             }
-            if (!empty($product_json["item_skuid"])) {
-                $this->set_product_id($product_json["item_skuid"]);
+            if (!empty($productArray["item_skuid"])) {
+                $this->set_product_id($productArray["item_skuid"]);
             } else {
                 $this->set_product_id(null);
             }
-            if (!empty($product_json["item_expiration_peroid"])) {
-                $this->set_expiration_peroid($product_json["item_expiration_peroid"]);
+            if (!empty($productArray["item_qty"])) {
+                $this->set_qty($productArray["item_qty"]);
+            } else {
+                $this->set_qty(null);
+            }
+            if (!empty($productArray["item_expiration_peroid"])) {
+                $this->set_expiration_peroid($productArray["item_expiration_peroid"]);
             } else {
                 $this->set_expiration_peroid(null);
             }
-            if (!empty($product_json["item_date_opend"])) {
-                $this->set_item_date_opend($product_json["item_date_opend"]);
+            if (!empty($productArray["item_date_opend"])) {
+                $this->set_item_date_opend($productArray["item_date_opend"]);
             } else {
                 $this->set_item_date_opend(null);
             }
 
-            if (!empty($product_json["item_date_expiry"])) {
-                $this->set_item_date_expiry($product_json["item_date_expiry"]);
+            if (!empty($productArray["item_date_expiry"])) {
+                $this->set_item_date_expiry($productArray["item_date_expiry"]);
             } else {
                 $this->set_item_date_expiry(null);
             }
-            if (!empty($product_json["item_date_add"])){
-                $this->set_item_date_add($product_json["item_date_add"]);
+            if (!empty($productArray["item_date_add"])){
+                $this->set_item_date_add($productArray["item_date_add"]);
             } else {
                 $this->set_item_date_add(null);
+            }
+            if (!empty($productArray["item_opend"])){
+                $this->set_item_opend($productArray["item_opend"]);
+            } else {
+                $this->set_item_opend(null);
             }
 
 
@@ -82,9 +96,17 @@ class Product
     }
 
     // getters & setters
+    public function get_json(): ?array
+    {
+        return $this->json;
+    }
     public function get_name(): ?string
     {
         return $this->name;
+    }
+    public function get_opend(): ?int
+    {
+        return $this->item_opend;
     }
 
     public function get_url(): ?string
@@ -97,9 +119,13 @@ class Product
         return $this->img_url;
     }
 
-    public function get_id(): int
+    public function get_id(): ?int
     {
         return $this->product_id;
+    }
+    public function get_qty(): int
+    {
+        return $this->qty;
     }
 
     public function get_weight(): ?string
@@ -137,10 +163,18 @@ class Product
     {
         $this->name = $name;
     }
+    public function set_item_opend(?int $opend)
+    {
+        $this->item_opend = $opend;
+    }
 
     public function set_url(?string $url)
     {
         $this->url = $url;
+    }
+    public function set_qty(?int $qty)
+    {
+        $this->qty = $qty;
     }
 
     public function set_img_url(?string $img_url)

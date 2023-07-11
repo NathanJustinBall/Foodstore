@@ -11,7 +11,6 @@ class Config{
     function getParameter(string $parameter) { // if params dot notation
         $keys = explode('.', $parameter);
         $iterator = $this->contents;
-        //var_dump(1, $iterator);
         foreach ($keys as $key) {
             if (isset($iterator[$key])) {
                 $iterator = $iterator[$key];

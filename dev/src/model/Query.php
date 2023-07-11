@@ -1,9 +1,9 @@
 <?php 
-namespace App\controller;
+namespace App\model;
 
 class Query {
     public $vendor = '';
-    public $searchQuery = '';  # barcode also funcitons as item name
+    public $searchQuery = '';  // barcode also funcitons as item name
 
     public function __construct($vendor, $searchQuery){
         $this->searchQuery = $searchQuery;

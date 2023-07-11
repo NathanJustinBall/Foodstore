@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 {% endblock %}
+{% include "navigation.twig" %}
 
 <div class=product_space>
     {% for Product in allProducts %}
@@ -15,6 +16,7 @@
         <h1>{{ Product.get_name }} </h1>
         <img id="image" src={{ Product.get_img_url }} class="w3-round">
         <p2>Vendor {{ Product.get_vendor }} </p2> <br>
+        <p2>Quantity {{ Product.get_qty }} </p2> <br>
         <p2>Price {{ Product.get_price }} </p2> <br>
         <p2>Weight {{ Product.get_weight }} </p2> <br>   
         <p2> Date added {{ Product.get_item_date_add }}</p2> <br>

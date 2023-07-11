@@ -1,0 +1,11 @@
+html *{
+    font-family: 'Ysabeau Infant', sans-serif;
+}
+
+
+.left {
+    float: left;
+    background-color: #555;
+    padding: 10px;
+    margin: 10px;
+}
